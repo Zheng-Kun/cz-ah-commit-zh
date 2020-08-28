@@ -21,11 +21,8 @@
   "homepage": "https://github.com/Zheng-Kun/git-commit-message#readme",
   "devDependencies": {
     "commitizen": "^4.2.1",
-    "cz-conventional-changelog": "^3.3.0"
+    "cz-conventional-changelog": "^3.3.0",
+    "cz-emoji": "^1.2.2"
   },
-  "config": {
-    "commitizen": {
-      "path": "./node_modules/cz-conventional-changelog"
-    }
-  }
+  "config": {}
 }
