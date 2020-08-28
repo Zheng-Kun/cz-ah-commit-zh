@@ -1,0 +1,152 @@
+[
+  {
+    "emoji": "🎨",
+    "code": ":art:",
+    "description": "Improving structure / format of the code.",
+    "name": "style"
+  },
+  {
+    "emoji": "🐛",
+    "code": ":bug:",
+    "description": "Fixing a bug.",
+    "name": "fix"
+  },
+  {
+    "emoji": "💄",
+    "code": ":lipstick:",
+    "description": "Updating the UI and style files.",
+    "name": "ui"
+  },
+  {
+    "emoji": "✏️",
+    "code": ":pencil2:",
+    "description": " Fixing typos.",
+    "name": "typo"
+  },
+  {
+    "emoji": "⚡️",
+    "code": ":zap:",
+    "description": "Improving performance.",
+    "name": "perf"
+  },
+  {
+    "emoji": "🔥",
+    "code": ":fire:",
+    "description": "Removing code or files.",
+    "name": "prune"
+  },
+  {
+    "emoji": "✨",
+    "code": ":sparkles:",
+    "description": "Introducing new features.",
+    "name": "feature"
+  },
+  {
+    "emoji": "📝",
+    "code": ":pencil:",
+    "description": "Writing docs.",
+    "name": "docs"
+  },
+  {
+    "emoji": "🚀",
+    "code": ":rocket:",
+    "description": "Deploying stuff.",
+    "name": "deploy"
+  },
+  {
+    "emoji": "✅",
+    "code": ":white_check_mark:",
+    "description": "Adding tests.",
+    "name": "test"
+  },
+  {
+    "emoji": "🚨",
+    "code": ":rotating_light:",
+    "description": "Removing linter warnings.",
+    "name": "lint"
+  },
+  {
+    "emoji": "🚧",
+    "code": ":construction:",
+    "description": "Work in progress.",
+    "name": "wip"
+  },
+  {
+    "emoji": "⬇️",
+    "code": ":arrow_down:",
+    "description": " Downgrading dependencies.",
+    "name": "downgrade"
+  },
+  {
+    "emoji": "⬆️",
+    "code": ":arrow_up:",
+    "description": " Upgrading dependencies.",
+    "name": "upgrade"
+  },
+  {
+    "emoji": "♻️",
+    "code": ":recycle:",
+    "description": " Refactoring code.",
+    "name": "refactoring"
+  },
+  {
+    "emoji": "🌐",
+    "code": ":globe_with_meridians:",
+    "description": "Internationalization and localization.",
+    "name": "i18n"
+  },
+  {
+    "emoji": "💩",
+    "code": ":poop:",
+    "description": "Writing bad code that needs to be improved.",
+    "name": "poo"
+  },
+  {
+    "emoji": "⏪",
+    "code": ":rewind:",
+    "description": "Reverting changes.",
+    "name": "revert"
+  },
+  {
+    "emoji": "🔀",
+    "code": ":twisted_rightwards_arrows:",
+    "description": "Merging branches.",
+    "name": "merge"
+  },
+  {
+    "emoji": "📦",
+    "code": ":package:",
+    "description": "Updating compiled files or packages.",
+    "name": "dep-up"
+  },
+  {
+    "emoji": "🚚",
+    "code": ":truck:",
+    "description": "Moving or renaming files.",
+    "name": "mv"
+  },
+  {
+    "emoji": "💥",
+    "code": ":boom:",
+    "description": "Introducing breaking changes.",
+    "name": "breaking"
+  },
+  {
+    "emoji": "👌",
+    "code": ":ok_hand:",
+    "description": "Updating code due to code review changes.",
+    "name": "review"
+  },
+  {
+    "emoji": "⚗",
+    "code": ":alembic:",
+    "description": " Experimenting new things",
+    "name": "experiment"
+  },
+  {
+    "emoji": "🔍",
+    "code": ":mag:",
+    "description": "Improving SEO",
+    "name": "seo"
+  }
+]

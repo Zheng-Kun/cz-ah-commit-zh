@@ -1,0 +1,31 @@
+{
+  "name": "git-commit-message",
+  "version": "1.0.0",
+  "description": "commit message格式化",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Zheng-Kun/git-commit-message.git"
+  },
+  "keywords": [
+    "git"
+  ],
+  "author": "zhengkun",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Zheng-Kun/git-commit-message/issues"
+  },
+  "homepage": "https://github.com/Zheng-Kun/git-commit-message#readme",
+  "devDependencies": {
+    "commitizen": "^4.2.1",
+    "cz-conventional-changelog": "^3.3.0"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  }
+}
