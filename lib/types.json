@@ -18,16 +18,22 @@
     "name": "fix"
   },
   {
-    "emoji": "📝",
-    "code": ":pencil:",
-    "description": "Writing docs.",
-    "name": "docs"
+    "emoji": "🚀",
+    "code": ":rocket:",
+    "description": "Deploying stuff.(npm run build)",
+    "name": "deploy"
   },
   {
     "emoji": "🎨",
     "code": ":art:",
     "description": "Improving structure / format of the code.",
     "name": "style"
+  },
+  {
+    "emoji": "📝",
+    "code": ":pencil:",
+    "description": "Writing docs.",
+    "name": "docs"
   },
   {
     "emoji": "🔥",
@@ -38,7 +44,7 @@
   {
     "emoji": "🚚",
     "code": ":truck:",
-    "description": "Moving or renaming files.",
+    "description": "Moving or renaming files.(e.g.: files, paths, routes)",
     "name": "mv"
   },
   {
@@ -46,6 +52,12 @@
     "code": ":pencil2:",
     "description": " Fixing typos.",
     "name": "typo"
+  },
+  {
+    "emoji": "💬",
+    "code": ":speech_balloon:",
+    "description": "Add or update text and literals.",
+    "name": "text"
   },
   {
     "emoji": "💄",
@@ -60,28 +72,10 @@
     "name": "perf"
   },
   {
-    "emoji": "🚀",
-    "code": ":rocket:",
-    "description": "Deploying stuff.",
-    "name": "deploy"
-  },
-  {
     "emoji": "✅",
     "code": ":white_check_mark:",
-    "description": "Adding tests.",
+    "description": "Add or update tests.",
     "name": "test"
-  },
-  {
-    "emoji": "🚨",
-    "code": ":rotating_light:",
-    "description": "Removing linter warnings.",
-    "name": "lint"
-  },
-  {
-    "emoji": "🌐",
-    "code": ":globe_with_meridians:",
-    "description": "Internationalization and localization.",
-    "name": "i18n"
   },
   {
     "emoji": "⏪",
@@ -96,21 +90,28 @@
     "name": "merge"
   },
   {
-    "emoji": "💥",
-    "code": ":boom:",
-    "description": "Introducing breaking changes.",
-    "name": "breaking"
-  },
-  {
-    "emoji": "👌",
-    "code": ":ok_hand:",
-    "description": "Updating code due to code review changes.",
-    "name": "review"
-  },
-  {
     "emoji": "🔍",
     "code": ":mag:",
-    "description": "Improving SEO",
+    "description": "Improving SEO.",
     "name": "seo"
+  },
+  {
+    "emoji": "🌐",
+    "code": ":globe_with_meridians:",
+    "description": "Internationalization and localization.",
+    "name": "i18n"
+  },
+  {
+    "emoji": "🌐",
+    "code": ":globe_with_meridians:",
+    "description": "Internationalization and localization.",
+    "name": "i18n"
+  },
+  {
+    "emoji": "🎉",
+    "code": ":tada:",
+    "description": "Initial commit or Begin a project.",
+    "name": "init"
   }
+
 ]

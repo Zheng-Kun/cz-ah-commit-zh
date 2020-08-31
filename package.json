@@ -21,10 +21,7 @@
   },
   "homepage": "https://github.com/Zheng-Kun/git-commit-message#readme",
   "devDependencies": {
-    "commitizen": "^4.2.1",
-    "cz-conventional-changelog": "^3.3.0",
-    "cz-emoji": "^1.2.2",
-    "inquirer-maxlength-input-prompt": "^1.0.1"
+    "commitizen": "^4.2.1"
   },
   "config": {},
   "dependencies": {

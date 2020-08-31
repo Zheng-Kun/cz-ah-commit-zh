@@ -8,11 +8,11 @@ var configLoader = require('commitizen').configLoader;
 var config = configLoader.load() || {};
 var options = {
   types: config.types || ahCommitTypes,
-  defaultType: process.env.CZ_TYPE || config.defaultType,
-  defaultScope: process.env.CZ_SCOPE || config.defaultScope,
-  defaultSubject: process.env.CZ_SUBJECT || config.defaultSubject,
-  defaultBody: process.env.CZ_BODY || config.defaultBody,
-  defaultIssues: process.env.CZ_ISSUES || config.defaultIssues,
+  defaultType: process.env.CZ_TYPE || config.defaultType || '',
+  defaultScope: process.env.CZ_SCOPE || config.defaultScope || '',
+  defaultSubject: process.env.CZ_SUBJECT || config.defaultSubject || '',
+  defaultBody: process.env.CZ_BODY || config.defaultBody || '',
+  defaultIssues: process.env.CZ_ISSUES || config.defaultIssues || '',
   disableScopeLowerCase:
     process.env.DISABLE_SCOPE_LOWERCASE || config.disableScopeLowerCase,
   disableSubjectLowerCase:
@@ -102,7 +102,8 @@ const questions = [
         ? value.trim()
         : value.trim().toLowerCase();
     }
-  }, {
+  },
+  {
     type: 'input',
     name: 'subject',
     message: function(answers) {
@@ -166,7 +167,7 @@ const questions = [
     }
   },
   {
-    type: 'confirm',
+    type: 'input',
     name: 'issues',
     message: 'Please enter the key of the closed issue on JIRA.(e.g. PORT-1233 or PORT-12, PORT-13, PORT-15):(press enter to skip)\n',
     when: function(answers) {
@@ -178,33 +179,32 @@ const questions = [
 
 module.exports = {
   prompter: function(cz, commit) {
-    // console.log("options",options)
     cz.prompt.registerPrompt('autocomplete', require('inquirer-autocomplete-prompt'))
     cz.prompt(questions).then(answers => {
-      var wrapOptions = {
+      let wrapOptions = {
         trim: true,
         cut: false,
         newline: '\n',
         indent: '',
         width: options.maxLineWidth
       };
-      // parentheses are only needed when a scope is present
-      var scope = answers.scope ? '(' + answers.scope + ')' : '';
 
-      var head = answers.type.emoji + " " + answers.type.name + scope + ': ' + answers.subject;
-      var body = answers.body ? wrap(answers.body, wrapOptions) : false;
+      let scope = answers.scope ? '(' + answers.scope + ')' : '';
 
-      var breaking = answers.breaking ? answers.breaking.trim() : '';
-        breaking = breaking
-          ? 'BREAKING CHANGE: ' + breaking.replace(/^BREAKING CHANGE:\s*?/, '')
-          : '';
-        breaking = breaking ? wrap(breaking, wrapOptions) : false;
-      
-        var issues = answers.issues ? answers.breaking.trim() : '';
-        issues = issues ? 'Closes  ' + issues.replace(/^Closes\s*/, '')
+      let head = answers.type.name + scope + ': ' + answers.type.emoji + answers.subject;
+      let body = answers.body ? wrap(answers.body, wrapOptions) : false;
+
+      let breaking = answers.breaking ? answers.breaking.trim() : '';
+      breaking = breaking
+        ? 'BREAKING CHANGE: ' + breaking.replace(/^BREAKING CHANGE:\s*?/, '')
         : '';
+      breaking = breaking ? wrap(breaking, wrapOptions) : false;
+      
+      let issues = answers.issues ? answers.issues.trim() : '';
+      issues = issues ? 'Closes  ' + issues.replace(/^Closes\s*/, '')
+      : '';
 
-        commit([head, body, breaking, issues].filter(el => el).join('\n\n'))
+      commit([head, body, breaking, issues].filter(el => el).join('\n\n'))
     })
   }
 }
