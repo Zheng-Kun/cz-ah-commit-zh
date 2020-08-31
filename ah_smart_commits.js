@@ -1,97 +1,210 @@
-var inquirer = require('inquirer')
+var ahCommitTypes = require('./lib/types.json');
+var chalk = require('chalk');
+var wrap = require('word-wrap');
+const fuse = require('fuse.js')
+// var ahTypes = require('./lib/types.json')
 
-// This can be any kind of SystemJS compatible module.
-// We use Commonjs here, but ES6 or AMD would do just
-// fine.
-module.exports = {
-  prompter: prompter,
-  formatCommit: formatCommit
+var configLoader = require('commitizen').configLoader;
+var config = configLoader.load() || {};
+var options = {
+  types: config.types || ahCommitTypes,
+  defaultType: process.env.CZ_TYPE || config.defaultType,
+  defaultScope: process.env.CZ_SCOPE || config.defaultScope,
+  defaultSubject: process.env.CZ_SUBJECT || config.defaultSubject,
+  defaultBody: process.env.CZ_BODY || config.defaultBody,
+  defaultIssues: process.env.CZ_ISSUES || config.defaultIssues,
+  disableScopeLowerCase:
+    process.env.DISABLE_SCOPE_LOWERCASE || config.disableScopeLowerCase,
+  disableSubjectLowerCase:
+    process.env.DISABLE_SUBJECT_LOWERCASE || config.disableSubjectLowerCase,
+  maxHeaderWidth:
+    (process.env.CZ_MAX_HEADER_WIDTH &&
+      parseInt(process.env.CZ_MAX_HEADER_WIDTH)) ||
+    config.maxHeaderWidth ||
+    100,
+  maxLineWidth:
+    (process.env.CZ_MAX_LINE_WIDTH &&
+      parseInt(process.env.CZ_MAX_LINE_WIDTH)) ||
+    config.maxLineWidth ||
+    100
+}
+function getEmojiChoices(types) {
+  const maxNameLength = types.reduce((maxLength, type) => (type.name.length > maxLength ? type.name.length : maxLength), 0)
+
+  return types.map(choice => ({
+    name: `${choice.name.padEnd(maxNameLength)}  ${choice.emoji}  ${choice.description}`,
+    value: {
+      emoji: choice.emoji,
+      name: choice.name,
+    },
+    code: choice.code
+  }))
+}
+
+var filterSubject = function(subject, disableSubjectLowerCase) {
+  subject = subject.trim();
+  if (!disableSubjectLowerCase && subject.charAt(0).toLowerCase() !== subject.charAt(0)) {
+    subject =
+      subject.charAt(0).toLowerCase() + subject.slice(1, subject.length);
+  }
+  while (subject.endsWith('.')) {
+    subject = subject.slice(0, subject.length - 1);
+  }
+  return subject;
 };
 
-// When a user runs `git cz`, prompter will
-// be executed. We pass you cz, which currently
-// is just an instance of inquirer.js. Using
-// this you can ask questions and get answers.
-//
-// The commit callback should be executed when
-// you're ready to send back a commit template
-// to git.
-//
-// By default, we'll de-indent your commit
-// template and will keep empty lines.
-function prompter(cz, commit) {
+var headerLength = function(answers) {
+  return (
+    (answers.type.name + answers.type.emoji).length + 2 + (answers.scope ? answers.scope.length + 2 : 0)
+  );
+};
 
-  // Let's ask some questions of the user
-  // so that we can populate our commit
-  // template.
-  //
-  // See inquirer.js docs for specifics.
-  // You can also opt to use another input
-  // collection library if you prefer.
-  inquirer.prompt([
-    {
-      type: 'input',
-      name: 'message',
-      message: 'GitHub commit message (required):\n',
-      validate: function(input) {
-        if (!input) {
-          return 'empty commit message';
-        } else {
-          return true;
-        }
-      }
-    },
-    {
-      type: 'input',
-      name: 'issues',
-      message: 'Jira Issue ID(s) (required):\n',
-      validate: function(input) {
-        if (!input) {
-          return 'Must specify issue IDs, otherwise, just use a normal commit message';
-        } else {
-          return true;
-        }
-      }
-    },
-    {
-      type: 'input',
-      name: 'workflow',
-      message: 'Workflow command (testing, closed, etc.) (optional):\n',
-      validate: function(input) {
-        if (input && input.indexOf(' ') !== -1) {
-          return 'Workflows cannot have spaces in smart commits. If your workflow name has a space, use a dash (-)';
-        } else {
-          return true;
-        }
-      }
-    },
-    {
-      type: 'input',
-      name: 'time',
-      message: 'Time spent (i.e. 3h 15m) (optional):\n'
-    },
-    {
-      type: 'input',
-      name: 'comment',
-      message: 'Jira comment (optional):\n'
-    },
-  ]).then((answers) => {
-    formatCommit(commit, answers);
-  });
-}
+var maxSummaryLength = function(options, answers) {
+  return options.maxHeaderWidth - headerLength(answers);
+};
 
-function formatCommit(commit, answers) {
-  commit(filter([
-    answers.message,
-    answers.issues,
-    answers.workflow ? '#' + answers.workflow : undefined,
-    answers.time ? '#time ' + answers.time : undefined,
-    answers.comment ? '#comment ' + answers.comment : undefined,
-  ]).join(' '));
-}
 
-function filter(array) {
-  return array.filter(function(item) {
-    return !!item;
-  });
+
+let choices = getEmojiChoices(ahCommitTypes)
+// console.log(choices)
+
+const fuzzy = new fuse(choices, {
+  shouldSort: true,
+  threshold: 0.4,
+  location: 0,
+  distance: 100,
+  maxPatternLength: 32,
+  minMatchCharLength: 1,
+  keys: ['name', 'code']
+})
+
+const questions = [
+  {
+    type: 'autocomplete',
+    // type: 'list',
+    name: 'type',
+    message: "Select the type of change you're committing:",
+    choices: choices,
+    // source: (_, query) => Promise.resolve(choices),
+    source: (_, query) =>  {
+      // console.log(query,Promise.resolve(query ? fuzzy.search(query) : choices))
+      return  Promise.resolve(query ? fuzzy.search(query) : choices) 
+    }
+  },
+  {
+    type: 'input',
+    name: 'scope',
+    message:
+      'What is the scope of this change (e.g. component or file name): (press enter to skip)',
+    // default: options.defaultScope,
+    filter: function(value) {
+      return options.disableScopeLowerCase
+        ? value.trim()
+        : value.trim().toLowerCase();
+    }
+  }, {
+    type: 'input',
+    name: 'subject',
+    message: function(answers) {
+      return (
+        'Write a short, imperative tense description of the change (max ' +
+        maxSummaryLength(options, answers) +
+        ' chars):\n'
+      );
+    },
+    default: options.defaultSubject,
+    validate: function(subject, answers) {
+      var filteredSubject = filterSubject(subject, options.disableSubjectLowerCase);
+      return filteredSubject.length == 0
+        ? 'subject is required'
+        : filteredSubject.length <= maxSummaryLength(options, answers)
+        ? true
+        : 'Subject length must be less than or equal to ' +
+          maxSummaryLength(options, answers) +
+          ' characters. Current length is ' +
+          filteredSubject.length +
+          ' characters.';
+    },
+    transformer: function(subject, answers) {
+      var filteredSubject = filterSubject(subject, options.disableSubjectLowerCase);
+      var color =
+        filteredSubject.length <= maxSummaryLength(options, answers)
+          ? chalk.green
+          : chalk.red;
+      return color('(' + filteredSubject.length + ') ' + subject);
+    },
+    filter: function(subject) {
+      return filterSubject(subject, options.disableSubjectLowerCase);
+    }
+  },
+  {
+    type: 'input',
+    name: 'body',
+    message:
+      'Provide a longer description of the change: (press enter to skip. Use imperative, present tense: “change” not “changed” nor “changes”,Includes motivation for the change and contrasts with previous behavior)\n',
+    default: options.defaultBody
+  },
+  {
+    type: 'confirm',
+    name: 'isBreaking',
+    message: 'Are there any breaking changes?',
+    default: false
+  },
+  {
+    type: 'input',
+    name: 'breaking',
+    message:
+      'A BREAKING CHANGE commit requires a Footer. Please enter a longer description of the commit itself:(It can be description of the change, justification and migration notes)\n',
+    when: function(answers) {
+      return answers.isBreaking;
+    },
+    validate: function(breakingBody, answers) {
+      return (
+        breakingBody.trim().length > 0 ||
+        'Footer is required for BREAKING CHANGE'
+      );
+    }
+  },
+  {
+    type: 'confirm',
+    name: 'issues',
+    message: 'Please enter the key of the closed issue on JIRA.(e.g. PORT-1233 or PORT-12, PORT-13, PORT-15):(press enter to skip)\n',
+    when: function(answers) {
+      return answers.type.name === 'fix'
+    },
+  }
+
+]
+
+module.exports = {
+  prompter: function(cz, commit) {
+    // console.log("options",options)
+    cz.prompt.registerPrompt('autocomplete', require('inquirer-autocomplete-prompt'))
+    cz.prompt(questions).then(answers => {
+      var wrapOptions = {
+        trim: true,
+        cut: false,
+        newline: '\n',
+        indent: '',
+        width: options.maxLineWidth
+      };
+      // parentheses are only needed when a scope is present
+      var scope = answers.scope ? '(' + answers.scope + ')' : '';
+
+      var head = answers.type.emoji + " " + answers.type.name + scope + ': ' + answers.subject;
+      var body = answers.body ? wrap(answers.body, wrapOptions) : false;
+
+      var breaking = answers.breaking ? answers.breaking.trim() : '';
+        breaking = breaking
+          ? 'BREAKING CHANGE: ' + breaking.replace(/^BREAKING CHANGE:\s*?/, '')
+          : '';
+        breaking = breaking ? wrap(breaking, wrapOptions) : false;
+      
+        var issues = answers.issues ? answers.breaking.trim() : '';
+        issues = issues ? 'Closes  ' + issues.replace(/^Closes\s*/, '')
+        : '';
+
+        commit([head, body, breaking, issues].filter(el => el).join('\n\n'))
+    })
+  }
 }
