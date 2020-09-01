@@ -1,8 +1,8 @@
 {
-  "name": "git-commit-message",
+  "name": "cz-ah-commit",
   "version": "1.0.0",
   "description": "commit message格式化",
-  "main": "index.js",
+  "main": "ah_smart_commits.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "commit": "cz"
@@ -20,11 +20,17 @@
     "url": "https://github.com/Zheng-Kun/git-commit-message/issues"
   },
   "homepage": "https://github.com/Zheng-Kun/git-commit-message#readme",
-  "devDependencies": {
-    "commitizen": "^4.2.1"
+  "devDependencies": {},
+  "config": {
+    "commitizen": {
+      "path": "./ah_smart_commits.js"
+    }
   },
-  "config": {},
   "dependencies": {
-    "inquirer-autocomplete-prompt": "^1.1.0"
+    "chalk": "^4.1.0",
+    "commitizen": "^4.2.1",
+    "fuse.js": "^6.4.1",
+    "inquirer-autocomplete-prompt": "^1.1.0",
+    "word-wrap": "^1.2.3"
   }
 }

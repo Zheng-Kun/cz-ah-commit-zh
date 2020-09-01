@@ -36,6 +36,12 @@
     "name": "docs"
   },
   {
+    "emoji": "🛠",
+    "code": "hammer_and_wrench",
+    "description": "Change build tools or AIDS",
+    "name": "chore"
+  },
+  {
     "emoji": "🔥",
     "code": ":fire:",
     "description": "Removing code or files.",
@@ -102,16 +108,9 @@
     "name": "i18n"
   },
   {
-    "emoji": "🌐",
-    "code": ":globe_with_meridians:",
-    "description": "Internationalization and localization.",
-    "name": "i18n"
-  },
-  {
     "emoji": "🎉",
     "code": ":tada:",
     "description": "Initial commit or Begin a project.",
     "name": "init"
   }
-
 ]
