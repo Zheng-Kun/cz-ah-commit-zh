@@ -1,6 +1,6 @@
 {
   "name": "cz-ah-commit",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "commit message格式化",
   "main": "ah_smart_commits.js",
   "scripts": {

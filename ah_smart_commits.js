@@ -75,7 +75,7 @@ const fuzzy = new fuse(choices, {
   distance: 100,
   maxPatternLength: 32,
   minMatchCharLength: 1,
-  keys: ['name', 'code']
+  keys: ['name', 'description']
 })
 
 const questions = [
@@ -87,8 +87,8 @@ const questions = [
     choices: choices,
     // source: (_, query) => Promise.resolve(choices),
     source: (_, query) =>  {
-      // console.log(query,Promise.resolve(query ? fuzzy.search(query) : choices))
-      return  Promise.resolve(query ? fuzzy.search(query) : choices) 
+      // console.log(Promise.resolve(query ? fuzzy.search(query) : choices))
+      return  Promise.resolve(query ? fuzzy.search(query).map(el => el.item) : choices) 
     }
   },
   {
