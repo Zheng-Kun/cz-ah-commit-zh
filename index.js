@@ -107,7 +107,7 @@ const questions = [
     name: 'subject', // 提交简介
     message: function(answers) {
       return (
-        '写一个间断的变化描述，使用祈使句 (最多 ' +
+        '写一个简短的变化描述，使用祈使句 (最多 ' +
         maxSummaryLength(options, answers) +
         ' 个字符):\n'
       );
@@ -116,14 +116,14 @@ const questions = [
     validate: function(subject, answers) {
       var filteredSubject = filterSubject(subject, options.disableSubjectLowerCase);
       return filteredSubject.length == 0
-        ? 'subject is required' // 简介必填
+        ? '简介为必填项' // 简介必填
         : filteredSubject.length <= maxSummaryLength(options, answers) // 长度控制
         ? true
-        : 'Subject length must be less than or equal to ' +
+        : '简介的长度不能超过' +
           maxSummaryLength(options, answers) +
-          ' characters. Current length is ' +
+          ' 个字符. 当前为 ' +
           filteredSubject.length +
-          ' characters.';
+          ' 个字符';
     },
     transformer: function(subject, answers) {
       var filteredSubject = filterSubject(subject, options.disableSubjectLowerCase); // 长短提示

@@ -9,17 +9,17 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Zheng-Kun/git-commit-message.git"
+    "url": "git+https://github.com/Zheng-Kun/cz-ah-commit-zh"
   },
   "keywords": [
     "git"
   ],
   "author": "zhengkun",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Zheng-Kun/git-commit-message/issues"
+    "url": "https://github.com/Zheng-Kun/cz-ah-commit-zh/issues"
   },
-  "homepage": "https://github.com/Zheng-Kun/git-commit-message#readme",
+  "homepage": "https://github.com/Zheng-Kun/cz-ah-commit-zh#readme",
   "devDependencies": {},
   "config": {
     "commitizen": {
