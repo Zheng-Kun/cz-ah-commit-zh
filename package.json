@@ -1,8 +1,8 @@
 {
-  "name": "cz-ah-commit",
-  "version": "1.0.2",
-  "description": "commit message格式化",
-  "main": "ah_smart_commits.js",
+  "name": "cz-ah-commit-zh",
+  "version": "1.0.0",
+  "description": "commit message格式化工具，中文版",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "commit": "cz"
@@ -23,7 +23,7 @@
   "devDependencies": {},
   "config": {
     "commitizen": {
-      "path": "./ah_smart_commits.js"
+      "path": "./index.js"
     }
   },
   "dependencies": {

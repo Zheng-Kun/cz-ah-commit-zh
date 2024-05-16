@@ -2,115 +2,115 @@
   {
     "emoji": "✨",
     "code": ":sparkles:",
-    "description": "Introducing new features.",
+    "description": "新功能.",
     "name": "feat"
   },
   {
     "emoji": "🚧",
     "code": ":construction:",
-    "description": "Work in progress.",
+    "description": "开发进行中.",
     "name": "wip"
   },
   {
     "emoji": "🐛",
     "code": ":bug:",
-    "description": "Fixing a bug.",
+    "description": "修复Bug.",
     "name": "fix"
   },
   {
     "emoji": "🚀",
     "code": ":rocket:",
-    "description": "Deploying stuff.(npm run build)",
+    "description": "部署相关的提交.(npm run build)",
     "name": "deploy"
   },
   {
     "emoji": "🎨",
     "code": ":art:",
-    "description": "Improving structure / format of the code.",
+    "description": "优化代码的结构或格式",
     "name": "style"
   },
   {
     "emoji": "📝",
     "code": ":pencil:",
-    "description": "Writing docs.",
+    "description": "文档的变更.",
     "name": "docs"
   },
   {
     "emoji": "🛠",
     "code": "hammer_and_wrench",
-    "description": "Change build tools or AIDS",
+    "description": "项目脚手架相关变更",
     "name": "chore"
   },
   {
     "emoji": "🔥",
     "code": ":fire:",
-    "description": "Removing code or files.",
+    "description": "移除代码或文件",
     "name": "prune"
   },
   {
     "emoji": "🚚",
     "code": ":truck:",
-    "description": "Moving or renaming files.(e.g.: files, paths, routes)",
+    "description": "移动重命名了文件/文件名.(e.g.: files, paths, routes)",
     "name": "mv"
   },
   {
     "emoji": "✏️",
     "code": ":pencil2:",
-    "description": " Fixing typos.",
+    "description": "错别字修复",
     "name": "typo"
   },
   {
     "emoji": "💬",
     "code": ":speech_balloon:",
-    "description": "Add or update text and literals.",
+    "description": "文案变更",
     "name": "text"
   },
   {
     "emoji": "💄",
     "code": ":lipstick:",
-    "description": "Updating the UI and style files.",
+    "description": "更新了UI样式或样式文件",
     "name": "ui"
   },
   {
     "emoji": "⚡️",
     "code": ":zap:",
-    "description": "Improving performance.",
+    "description": "性能或交互优化",
     "name": "perf"
   },
   {
     "emoji": "✅",
     "code": ":white_check_mark:",
-    "description": "Add or update tests.",
+    "description": "添加或更新测试用例",
     "name": "test"
   },
   {
     "emoji": "⏪",
     "code": ":rewind:",
-    "description": "Reverting changes.",
+    "description": "Revert",
     "name": "revert"
   },
   {
     "emoji": "🔀",
     "code": ":twisted_rightwards_arrows:",
-    "description": "Merging branches.",
+    "description": "Merge.",
     "name": "merge"
-  },
-  {
-    "emoji": "🔍",
-    "code": ":mag:",
-    "description": "Improving SEO.",
-    "name": "seo"
   },
   {
     "emoji": "🌐",
     "code": ":globe_with_meridians:",
-    "description": "Internationalization and localization.",
+    "description": "多语言字典文件变更",
     "name": "i18n"
+  },
+  {
+    "emoji": "🏷️",
+    "code": ":label:",
+    "description": "添加或更新types (TypeScript).",
+    "name": "types"
   },
   {
     "emoji": "🎉",
     "code": ":tada:",
-    "description": "Initial commit or Begin a project.",
+    "description": "项目初始化提交",
     "name": "init"
   }
 ]
