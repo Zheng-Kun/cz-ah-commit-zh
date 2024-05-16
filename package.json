@@ -1,6 +1,6 @@
 {
   "name": "cz-ah-commit-zh",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "commit message格式化工具，中文版",
   "main": "index.js",
   "scripts": {
